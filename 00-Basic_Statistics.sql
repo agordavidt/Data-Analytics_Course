@@ -9,14 +9,19 @@ LIMIT 5;
 SELECT * FROM staff
 LIMIT 5;
 
-/* How many total employees in this company */
+/* Total employees */
 SELECT COUNT(*) FROM staff;
 
 
-/* What about gender distribution? */
+/* The gender distribution of staffs/employees */
 SELECT gender, COUNT(*) AS total_employees
 FROM staff
 GROUP BY gender;
+
+/* How many distinct departments ? */
+SELECT DISTINCT(department)
+FROM staff
+ORDER BY department;
 
 /* How many employees in each department */
 SELECT department, COUNT(*) AS total_employee
@@ -25,31 +30,23 @@ GROUP BY department
 ORDER BY department;
 
 
-/* How many distinct departments ? */
-SELECT DISTINCT(department)
-FROM staff
-ORDER BY department;
-
-
 /* What is the highest and lowest salary of employees? */
 SELECT MAX(salary) AS Max_Salary, MIN(salary) AS Min_Salary
 FROM staff;
 
 
-/* what about salary distribution by gender group? */
-/* Data Interpretation: It seems like the average between male and female group is pretty close, with slighly higher average salary for Female group*/
+/* what is the salary distribution by gender? */
 SELECT gender, MIN(salary) As Min_Salary, MAX(salary) AS Max_Salary, AVG(salary) AS Average_Salary
 FROM staff
 GROUP BY gender;
 
 
-/* How much total salary company is spending each year? */
+/* Total salary company is pays each year? */
 SELECT SUM(salary)
 FROM staff;
 
 
-/* want to know distribution of min, max average salary by department */
-/* Data Interpretation: It seems like Outdoors deparment has the highest average salary paid  and Jewelery department with lowest */ 
+/* Salary distribution by departments */
 SELECT
 	department, 
 	MIN(salary) As Min_Salary, 
@@ -61,9 +58,8 @@ GROUP BY department
 ORDER BY 4 DESC;
 
 
-/* how spread out those salary around the average salary in each department ? */
-/* Data Interpretation: Although average salary for Outdoors is highest among deparment, it seems like data points
-are pretty close to average salary compared to other departments. */
+/* Spread of salary aroun the average - variation */
+
 SELECT 
 	department, 
 	MIN(salary) As Min_Salary, 
@@ -143,9 +139,7 @@ GROUP BY 1;
 
 /* 
 After comparing to Health department with Outdoors department, there are higher numbers of middle 
-and low earners buckets in Health than Outdoors. So from those salary earners point of view, the average salary
-for Outdoors deparment may be a little bit more stretch than Outdoors deparment which has more high earners.
-That's why salary standard deviation value of Health is highest among all departments.
+and low earners buckets in Health than Outdoors. 
 */
 
 
@@ -158,6 +152,4 @@ SELECT
 	DISTINCT(department)
 FROM staff
 WHERE department LIKE 'B%';
-
-
 
