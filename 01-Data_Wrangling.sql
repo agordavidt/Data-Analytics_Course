@@ -19,11 +19,12 @@ ORDER BY 1;
 
 /*** Concatetation ***/
 SELECT 
-	last_name,
-	job_title || ' - ' || department AS title_with_department 
+    last_name,
+    CONCAT(job_title, ' - ', department) AS title_with_department 
 FROM staff;
 
-/*** Trim ***/
+
+/*** Trim rmovees excess whitespace***/
 SELECT
 	TRIM('    data sciece rocks !    ');
 
@@ -99,60 +100,35 @@ WHERE job_title LIKE 'Assistant%';
 ---------------------- Replacing words ----------------------------------------------------
 
 /* we want to replace word Assistant with Asst.  */
-SELECT
-	OVERLAY(job_title PLACING 'Asst.' FROM 1 FOR LENGTH('Assistant')) AS shorten_job_title
-FROM staff
+SELECT job_title,
+    REPLACE(job_title, 'Assistant', 'Ass.') AS shorten_job_title,
+    department
+FROM staff 
 WHERE job_title LIKE 'Assistant%';
+
 
 
 --------------------------------------------------------------------------------------------
 
-/********* Filtering with Regualar Expressions *********/
--- SIMILAR TO
 
-/* We want to know job title with Assistant with Level 3 and 4 */
--- we will put the desired words into group
--- Pipe character | is for OR condition 
-SELECT
-	job_title
-FROM staff
-WHERE job_title SIMILAR TO '%Assistant%(III|IV)';
-
-
-/* now we want to know job title with Assistant, started with roman numerial I, follwed by 1 character
-it can be II,IV, etc.. as long as it starts with character I 
-
-underscore _ : for one character */
-
-SELECT
-	DISTINCT(job_title)
-FROM staff
-WHERE job_title SIMILAR TO '%Assistant I_';
-
-
-/* job title starts with either E, P or S character , followed by any characters*/
-SELECT job_title
-FROM staff
-WHERE job_title SIMILAR TO '[EPS]%';
 
 --------------------------------------------------------------------------------------------
 
 /********* Reformatting Numerics Data *********/
--- TRUNC() Truncate values Note: trunc just truncate value, not rounding value.
 -- CEIL
 -- FLOOR
 -- ROUND
 
 SELECT 
-	department, 
-	AVG(salary) AS avg_salary, 
-	TRUNC(AVG(salary)) AS truncated_salary,
-	TRUNC(AVG(salary), 2) AS truncated_salary_2_decimal,
-	ROUND(AVG(salary), 2) AS rounded_salary,
-	CEIL(AVG(salary)) AS ceiling_salary,
-	FLOOR(AVG(salary)) AS floor_salary
+    department, 
+    AVG(salary) AS avg_salary,    
+    ROUND(AVG(salary), 2) AS rounded_salary,
+    CEIL(AVG(salary)) AS ceiling_salary,
+    FLOOR(AVG(salary)) AS floor_salary
 FROM staff
 GROUP BY department;
+
+
 
 
 
