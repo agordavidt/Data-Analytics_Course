@@ -1,5 +1,5 @@
-	Team	Points	GD	Won	Lost	Draw
-0	Nigeria	7	2	2	0	1
-1	E. Guinea	7	6	2	0	1
-2	Ivory Coast	3	-3	1	2	0
-3	G. Bissau	0	-5	0	3	0
+Team	Points	GD	Won	Lost	Draw
+Nigeria	7	2	2	0	1
+E. Guinea	7	6	2	0	1
+Ivory Coast	3	-3	1	2	0
+G. Bissau	0	-5	0	3	0
